@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', socioCtrl.getSocios);
 router.post('/', socioCtrl.createSocio);
-router.get('/:id', socioCtrl.getSocio);
+router.get('/:dniSocio', socioCtrl.getSocio);
 router.delete('/:id', socioCtrl.deleteSocio);
 
 module.exports = router;

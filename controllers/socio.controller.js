@@ -23,7 +23,7 @@ socioCtrl.createSocio = async (req, res) => {
 }
 
 socioCtrl.getSocio = async (req, res) => {
-    var socio = await Socio.findById(req.params.id);
+    var socio = await Socio.find({dniSocio: req.params.dniSocio});
     res.json(socio);
 }
 
