@@ -8,7 +8,7 @@ app.use(cors({origin: 'http://localhost:4200'}));
 
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/socio', require('./routes/socio.route.js'));
-
+app.use('/api/actividad', require('./routes/actividad.route.js'));
 //setting
 app.set('port', process.env.PORT || 3000);
 //starting the server
