@@ -1,6 +1,8 @@
 const Suscripcion = require('./../models/suscripcion');
 const suscripcionCtrl = {}
 
+const Socio = require('./../models/socio');
+
 suscripcionCtrl.getSuscripciones = async (req, res) => {
     const suscripciones = await Suscripcion.find().populate(["socio","actividad"]);
     res.json(suscripciones);
@@ -42,5 +44,23 @@ suscripcionCtrl.deleteSuscripcion = async (req, res) => {
         });
     }
 }
+
+suscripcionCtrl.getSuscripcionesDniSocio = async (req, res) => {
+    try {
+        // Busca el socio por dniSocio
+        const socio = await Socio.findOne({ dniSocio: req.params.dniSocio });
+        
+        if (!socio) {
+            return res.status(404).json({ message: 'Socio no encontrado' });
+        }
+
+        // Busca las suscripciones usando el ObjectId del socio
+        const suscripciones = await Suscripcion.find({ socio: socio._id }).populate(['socio', 'actividad']);
+        
+        res.json(suscripciones);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener suscripciones', error });
+    }
+};
 
 module.exports = suscripcionCtrl;
