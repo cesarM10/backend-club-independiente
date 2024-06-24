@@ -51,7 +51,7 @@ suscripcionCtrl.getSuscripcionesDniSocio = async (req, res) => {
         const socio = await Socio.findOne({ dniSocio: req.params.dniSocio });
         
         if (!socio) {
-            return res.status(404).json({ message: 'Socio no encontrado' });
+            return res.json({});
         }
 
         // Busca las suscripciones usando el ObjectId del socio
