@@ -15,11 +15,25 @@ socioCtrl.createSocio = async (req, res) => {
             'message': 'Socio creado...'
         });
     } catch (error) {
+        console.log(error);
         res.status(400).json({
             'status': '0',
            'message': 'No se pudo crear el socio...'
         });
     }
+}
+
+socioCtrl.getUltimo = async (req, res) => {
+    try {
+        // Obtener todos los socios y ordenarlos por numeroSocio convertido a número
+        var socios = await Socio.find();
+
+        // Devolver el último socio
+        var ultimoSocio = socios[socios.length - 1];
+        res.json(ultimoSocio || []);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }  
 }
 
 socioCtrl.getSocio = async (req, res) => {
